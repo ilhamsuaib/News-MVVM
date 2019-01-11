@@ -1,0 +1,87 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "id.ilhamsuaib.newsmvvm"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+ext {
+    versions = [
+            appCompat: '1.0.2',
+            koin     : '1.0.2',
+            lifecycle: '2.0.0',
+            retrofit : '2.5.0',
+            okhttp   : '3.10.0',
+            rxAndroid: '2.1.0',
+            glide    : '4.8.0'
+    ]
+
+    androidxDeps = [
+            appCompat       : 'androidx.appcompat:appcompat:' + versions.appCompat,
+            material        : 'com.google.android.material:material:1.1.0-alpha01',
+            constraintlayout: 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2',
+            workManager     : 'android.arch.work:work-runtime:1.0.0-alpha12'
+    ]
+
+    lifecycleDeps = [
+            lifecycleExt    : 'androidx.lifecycle:lifecycle-extensions:' + versions.lifecycle,
+            lifecycleStreams: 'androidx.lifecycle:lifecycle-reactivestreams:' + versions.lifecycle
+    ]
+
+    koinDeps = [
+            koinCore     : 'org.koin:koin-core:' + versions.koin,
+            koinAndroid  : 'org.koin:koin-android:' + versions.koin,
+            koinViewModel: 'org.koin:koin-android-viewmodel:' + versions.koin
+    ]
+
+    networkDeps = [
+            retrofit      : 'com.squareup.retrofit2:retrofit:' + versions.retrofit,
+            gson          : 'com.squareup.retrofit2:converter-gson:' + versions.retrofit,
+            adapterRxJava2: 'com.squareup.retrofit2:adapter-rxjava2:' + versions.retrofit,
+            okhttp        : 'com.squareup.okhttp3:okhttp:' + versions.okhttp,
+            logging       : 'com.squareup.okhttp3:logging-interceptor:' + versions.okhttp
+    ]
+
+    rxDeps = [
+            rxAndroid: 'io.reactivex.rxjava2:rxandroid:' + versions.rxAndroid
+    ]
+
+    otherDeps = [
+            glide: 'com.github.bumptech.glide:glide:' + versions.glide
+    ]
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation androidxDeps.values()
+    implementation lifecycleDeps.values()
+    implementation koinDeps.values()
+    implementation networkDeps.values()
+    implementation rxDeps.values()
+    implementation otherDeps.values()
+
+    annotationProcessor 'com.github.bumptech.glide:compiler:' + versions.glide
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
