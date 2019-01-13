@@ -7,6 +7,3 @@ import android.util.Log
  * github.com/ilhamsuaib
  */
 
-fun logD(tag: String, msg: String) {
-    Log.d(tag, msg)
-}
